@@ -8,13 +8,17 @@
 
   <%= stylesheet_link_tag 'bootstrap.min',
       media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'bootstrap-theme.min',
+      media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'application',
       media: 'all', 'data-turbolinks-track' => true %>
 
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= yield %>
+  <div class='container'>
+    <%= yield %>
+  </div>
 
   <%= javascript_include_tag 'application',
       'data-turbolinks-track' => true %>
@@ -22,31 +26,5 @@
       'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'bootstrap.min.js',
       'data-turbolinks-track' => true %>
-
-  <!-- OpenTok Stuff -->
-  <script src='http://static.opentok.com/webrtc/v2.2/js/opentok.min.js'></script>
-  <script type="text/javascript">
-    var apiKey    = "<%= OPENTOK_APIKEY %>";
-    var sessionId = "2_MX40NDk2NTcwMn5-U2F0IEF1ZyAzMCAxMzowNDoyOSBQRFQgMjAxNH4wLjA1MjAwMTA2fn4";
-    var token = "T1==cGFydG5lcl9pZD00NDk2NTcwMiZzaWc9ODA2NmE4MWFmYzFlNjQyMmM1ODViYTExOWNjODY4MTk3NjE4OGVhMTpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTJfTVg0ME5EazJOVGN3TW41LVUyRjBJRUYxWnlBek1DQXhNem93TkRveU9TQlFSRlFnTWpBeE5INHdMakExTWpBd01UQTJmbjQmY3JlYXRlX3RpbWU9MTQwOTQyOTA4NyZub25jZT0wLjg3NDg3MDUxNzM2MjQ2Nzc=";
-
-    var session = OT.initSession(apiKey, sessionId);
-
-    session.connect(token, function(error) {
-      if (error) {
-        console.log(error.message);
-      } else {
-        session.publish('myPublisherDiv', {width: 320, height: 240});
-      }
-    });
-
-    session.on({
-      streamCreated: function(event) {
-        session.subscribe(
-          event.stream, 'subscribersDiv', { insertMode: 'append' }
-        );
-      }
-    });
-  </script>
 </body>
 </html>

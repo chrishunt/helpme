@@ -1,0 +1,31 @@
+<h1>...</h1>
+
+<div id='me'></div>
+
+<div id='them'></div>
+
+<!-- OpenTok Stuff -->
+<script src='http://static.opentok.com/webrtc/v2.2/js/opentok.min.js'></script>
+<script type="text/javascript">
+  var apiKey    = "<%= OPENTOK_API_KEY %>";
+  var sessionId = "<%= @stream.opentok_id %>";
+  var token     = "<%= @token %>";
+
+  var session = OT.initSession(apiKey, sessionId);
+
+  session.connect(token, function(error) {
+    if (error) {
+      console.log(error.message);
+    } else {
+      session.publish('me', {width: 320, height: 240});
+    }
+  });
+
+  session.on({
+    streamCreated: function(event) {
+      session.subscribe(
+        event.stream, 'them', { insertMode: 'append' }
+      );
+    }
+  });
+</script>
