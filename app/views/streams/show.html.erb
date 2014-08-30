@@ -1,10 +1,14 @@
-<p>
-  <%= @stream.comments %>
-</p>
+<header>
+  <h1 id="status">waiting for help...</h1>
+  <h1 class="leave">
+    <%= link_to 'leave the room', new_stream_path %>
+  </h1>
+</header>
 
-<div id='me'></div>
-
-<div id='them'></div>
+<div class='stream'>
+  <div id='me'></div>
+  <div id='them'></div>
+</div>
 
 <!-- OpenTok Stuff -->
 <script src='http://static.opentok.com/webrtc/v2.2/js/opentok.min.js'></script>
@@ -19,15 +23,22 @@
     if (error) {
       console.log(error.message);
     } else {
-      session.publish('me', {width: 320, height: 240});
+      $('body').addClass('classy');
+      session.publish('me', { width: 640, height: 480 });
     }
   });
 
   session.on({
     streamCreated: function(event) {
       session.subscribe(
-        event.stream, 'them', { insertMode: 'append' }
+        event.stream, 'them', { insertMode: 'append', width: 640, height: 480 }
       );
+      $('#me').addClass('subscribed');
+      $('#status').text('connected.');
+    },
+    streamDestroyed: function(event) {
+      $('#me').removeClass('subscribed');
+      $('#status').text('waiting for help...');
     }
   });
 </script>

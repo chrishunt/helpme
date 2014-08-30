@@ -1,8 +1,9 @@
 <%= form_for @stream do |f| %>
+  <h1>Help me with...</h1>
+
   <div class="form-group">
-    <label for="subject" class="control-label">What's up?</label>
-    <%= f.text_area :comments, class: 'form-control', rows: 5 %>
+    <%= f.text_area :comments, class: 'form-control', rows: 4 %>
   </div>
 
-  <%= f.submit 'Help!', class: 'btn btn-default' %>
+  <%= f.submit 'Get help', class: 'btn btn-primary btn-lg' %>
 <% end %>
