@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
-    <title>Tutor</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+  <title>Tutor</title>
 
-    <%= stylesheet_link_tag 'bootstrap.min',
-        media: 'all', 'data-turbolinks-track' => true %>
-    <%= stylesheet_link_tag 'application',
-        media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'bootstrap.min',
+      media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application',
+      media: 'all', 'data-turbolinks-track' => true %>
 
-    <%= csrf_meta_tags %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= yield %>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <%= yield %>
+  <%= javascript_include_tag 'application',
+      'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'jquery-1.11.1.min',
+      'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'bootstrap.min.js',
+      'data-turbolinks-track' => true %>
 
-    <%= javascript_include_tag 'application',
-        'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'jquery-1.11.1.min',
-        'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'bootstrap.min.js',
-        'data-turbolinks-track' => true %>
-  </body>
+  <!-- OpenTok Stuff -->
+  <script src='http://static.opentok.com/webrtc/v2.2/js/opentok.min.js'></script>
+  <script type="text/javascript">
+    var apiKey    = "<%= OPENTOK_APIKEY %>";
+    var sessionId = "2_MX40NDk2NTcwMn5-U2F0IEF1ZyAzMCAxMzowNDoyOSBQRFQgMjAxNH4wLjA1MjAwMTA2fn4";
+    var token = "T1==cGFydG5lcl9pZD00NDk2NTcwMiZzaWc9ODA2NmE4MWFmYzFlNjQyMmM1ODViYTExOWNjODY4MTk3NjE4OGVhMTpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTJfTVg0ME5EazJOVGN3TW41LVUyRjBJRUYxWnlBek1DQXhNem93TkRveU9TQlFSRlFnTWpBeE5INHdMakExTWpBd01UQTJmbjQmY3JlYXRlX3RpbWU9MTQwOTQyOTA4NyZub25jZT0wLjg3NDg3MDUxNzM2MjQ2Nzc=";
+
+    var session = OT.initSession(apiKey, sessionId);
+
+    session.connect(token, function(error) {
+      if (error) {
+        console.log(error.message);
+      } else {
+        session.publish('myPublisherDiv', {width: 320, height: 240});
+      }
+    });
+
+    session.on({
+      streamCreated: function(event) {
+        session.subscribe(
+          event.stream, 'subscribersDiv', { insertMode: 'append' }
+        );
+      }
+    });
+  </script>
+</body>
 </html>
