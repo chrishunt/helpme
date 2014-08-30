@@ -8,23 +8,12 @@ class StreamsController < ApplicationController
   end
 
   def create
-    stream = Stream.create!(
-      comments: params['stream']['comments'],
-      opentok_id: opentok.create_session.session_id
-    )
-
-    redirect_to stream
+    stream = Stream.new(comments: params['stream']['comments'])
+    redirect_to stream.init!
   end
 
   def show
-    @stream = Stream.find(params['id'])
-    @token = opentok.generate_token @stream.opentok_id
-  end
-
-  private
-
-  def opentok
-    require 'opentok'
-    OpenTok::OpenTok.new OPENTOK_API_KEY, OPENTOK_API_SECRET
+    @stream = Stream.find_by(slug: params['id'])
+    @token = OPENTOK.generate_token @stream.opentok_id
   end
 end

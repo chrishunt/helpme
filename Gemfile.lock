@@ -156,6 +156,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    uuidtools (2.1.5)
     web-console (2.0.0.beta3)
       activemodel (~> 4.0)
       binding_of_caller (= 0.7.3.pre1)
@@ -181,4 +182,5 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   unicorn
+  uuidtools
   web-console (~> 2.0.0.beta2)
