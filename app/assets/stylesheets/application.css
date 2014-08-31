@@ -18,6 +18,7 @@ body {
   font-size: 24px;
   text-align: center;
   background: #eee;
+  color: #444;
 }
 
 h1 {
@@ -67,7 +68,12 @@ header h1 {
 }
 
 .btn {
-  width: 100%;
+  width: 40%;
+  float: left;
+  margin-right: 10px;
+}
+.shout {
+  width: 56%;
 }
 
 .subscribed {

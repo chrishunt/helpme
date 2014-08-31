@@ -8,8 +8,10 @@ class StreamsController < ApplicationController
   end
 
   def create
-    stream = Stream.new(comments: params['stream']['comments'])
-    redirect_to stream.init!
+    stream = Stream.new(comments: params['stream']['comments']).init!
+    stream.notify_subscriptions if params['commit']['Shout it!']
+
+    redirect_to stream
   end
 
   def destroy

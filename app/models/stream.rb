@@ -6,7 +6,6 @@ class Stream < ActiveRecord::Base
     create_slug
     create_opentok_session
     save!
-    notify_subscriptions
     self
   end
 
@@ -14,13 +13,14 @@ class Stream < ActiveRecord::Base
     slug
   end
 
-  private
-
   def notify_subscriptions
+    self.update_attribute :broadcasted, true
     subscriptions.each do |s|
       SubscriptionMailer.notify(s, self).deliver
     end
   end
+
+  private
 
   def subscriptions
     Subscription.all.map do |s|
