@@ -27,6 +27,7 @@ h1 {
 }
 
 form {
+  text-align: left;
   padding-top: 20px;
   width: 500px;
   max-width: 500px;
@@ -43,6 +44,26 @@ header h1 {
   font-size: 32px;
   margin: 0;
   display: inline;
+}
+
+.thanks {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.thanks h1 {
+  text-align: center;
+  padding: 20px 0 10px 0;
+}
+
+.thanks a {
+  font-size: 48px;
+  color: #333;
+}
+
+.thanks a:hover {
+  color: #c7254e;
+  text-decoration: none;
 }
 
 .btn {

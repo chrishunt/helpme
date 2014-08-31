@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140830213503) do
+ActiveRecord::Schema.define(version: 20140831000837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,5 +25,15 @@ ActiveRecord::Schema.define(version: 20140830213503) do
   end
 
   add_index "streams", ["slug"], name: "index_streams_on_slug", using: :btree
+
+  create_table "subscriptions", force: true do |t|
+    t.string   "email"
+    t.string   "subjects"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "slug"
+  end
+
+  add_index "subscriptions", ["slug"], name: "index_subscriptions_on_slug", using: :btree
 
 end

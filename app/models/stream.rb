@@ -15,6 +15,12 @@ class Stream < ActiveRecord::Base
 
   private
 
+  def subscriptions
+    Subscription.all.map do |s|
+      s unless (s.subjects.split(',') & comments.split).empty?
+    end.compact
+  end
+
   def create_slug
     self.slug = Base64.encode64(UUIDTools::UUID.random_create)[0..8]
   end
