@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   resources :streams
   resources :subscriptions
-  root 'streams#index'
+  root 'streams#new'
 end
