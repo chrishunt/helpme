@@ -16,18 +16,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class='container'>
-    <%= yield %>
-
-    <footer>
-    </footer>
-  </div>
-
   <%= javascript_include_tag 'application',
       'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'jquery-1.11.1.min',
       'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'bootstrap.min.js',
       'data-turbolinks-track' => true %>
+
+  <div class='container'>
+    <%= yield %>
+
+    <footer>
+    </footer>
+  </div>
 </body>
 </html>
