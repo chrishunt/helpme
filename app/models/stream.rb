@@ -24,7 +24,10 @@ class Stream < ActiveRecord::Base
 
   def subscriptions
     Subscription.all.map do |s|
-      s unless (s.subjects.split(',') & comments.split).empty?
+      s unless (
+        s.subjects.split(',').map(&:downcase) &
+        comments.split.map(&:downcase)
+      ).empty?
     end.compact
   end
 
