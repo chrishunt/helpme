@@ -1,19 +1,19 @@
 <%= form_for @subscription do |f| %>
+  <h1>Help others with...<h1>
+
   <div class="form-group">
-    <label for="subscription_email">Email address</label>
+    <input type="text"
+           class="form-control"
+           id="subscription_subjects"
+           name="subscription[subjects]"
+           placeholder="math chemistry computers">
+  </div>
+  <div class="form-group">
     <input type="email"
            class="form-control"
            id="subscription_email"
            name="subscription[email]" placeholder="you@example.com">
   </div>
 
-  <label for="subscription_email">Subjects</label>
-  <div class="form-group">
-    <input type="text"
-           class="form-control"
-           id="subscription_subjects"
-           name="subscription[subjects]" placeholder="subject 1, subject 2">
-  </div>
-
-  <%= f.submit 'Subscribe to help requests', class: 'btn btn-primary btn-lg' %>
+  <%= f.submit 'Subscribe', class: 'btn btn-primary btn-lg shout' %>
 <% end %>
